@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net"
 	"net/http"
 	"sync"
@@ -434,7 +433,6 @@ func (c *Client) connect(identifier, serverAddr string) error {
 
 	conn, err := c.dial(serverAddr)
 	if err != nil {
-		log.Println("hello")
 		return err
 	}
 
