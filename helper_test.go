@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"math/rand"
 	"net"
@@ -14,8 +13,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/koding/tunnel"
-	"github.com/koding/tunnel/tunneltest"
+	"github.com/kaigoh/tunnel"
+	"github.com/kaigoh/tunnel/tunneltest"
 
 	"github.com/gorilla/websocket"
 )
@@ -59,7 +58,7 @@ func echoHTTP(tt *tunneltest.TunnelTest, echo string) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	p, err := ioutil.ReadAll(resp.Body)
+	p, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
 	}

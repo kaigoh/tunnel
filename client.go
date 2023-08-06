@@ -4,15 +4,15 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net"
 	"net/http"
 	"sync"
 	"sync/atomic"
 	"time"
 
+	"github.com/kaigoh/tunnel/proto"
 	"github.com/koding/logging"
-	"github.com/koding/tunnel/proto"
 
 	"github.com/hashicorp/yamux"
 )
@@ -436,7 +436,7 @@ func (c *Client) connect(identifier, serverAddr string) error {
 		return err
 	}
 
-	remoteURL := controlURL(conn)
+	remoteURL := controlURLWithSNI(conn, c.config.ServerAddr)
 	c.log.Debug("CONNECT to %q", remoteURL)
 	req, err := http.NewRequest("CONNECT", remoteURL, nil)
 	if err != nil {
@@ -460,7 +460,7 @@ func (c *Client) connect(identifier, serverAddr string) error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK || resp.Status != proto.Connected {
-		out, err := ioutil.ReadAll(resp.Body)
+		out, err := io.ReadAll(resp.Body)
 		if err != nil {
 			return fmt.Errorf("tunnel server error: status=%d, error=%s", resp.StatusCode, err)
 		}

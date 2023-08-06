@@ -4,12 +4,11 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net"
 	"net/http"
 
+	"github.com/kaigoh/tunnel/proto"
 	"github.com/koding/logging"
-	"github.com/koding/tunnel/proto"
 )
 
 var (
@@ -102,7 +101,7 @@ func noLocalServer() *http.Response {
 		Proto:         "HTTP/1.1",
 		ProtoMajor:    1,
 		ProtoMinor:    1,
-		Body:          ioutil.NopCloser(body),
+		Body:          io.NopCloser(body),
 		ContentLength: int64(body.Len()),
 	}
 }

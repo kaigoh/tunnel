@@ -17,8 +17,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/kaigoh/tunnel/proto"
 	"github.com/koding/logging"
-	"github.com/koding/tunnel/proto"
 
 	"github.com/hashicorp/yamux"
 )
