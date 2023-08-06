@@ -3,7 +3,6 @@ package tunnel
 import (
 	"crypto/tls"
 	"fmt"
-	"log"
 	"net"
 	"strings"
 	"sync"
@@ -112,7 +111,6 @@ func controlURL(conn net.Conn) string {
 }
 
 func controlURLWithSNI(conn net.Conn, server string) string {
-	log.Println("lame")
 	url := strings.Split(server, ":")
 	return fmt.Sprint(scheme(conn), "://", url[0], proto.ControlPath)
 }

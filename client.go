@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"sync"
@@ -479,6 +480,9 @@ func (c *Client) connect(identifier, serverAddr string) error {
 	openStream := func() error {
 		// this is blocking until client opens a session to us
 		stream, err = c.session.Open()
+		if err != nil {
+			log.Println("hello")
+		}
 		return err
 	}
 
