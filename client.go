@@ -434,6 +434,7 @@ func (c *Client) connect(identifier, serverAddr string) error {
 
 	conn, err := c.dial(serverAddr)
 	if err != nil {
+		log.Println("hello")
 		return err
 	}
 
@@ -480,9 +481,6 @@ func (c *Client) connect(identifier, serverAddr string) error {
 	openStream := func() error {
 		// this is blocking until client opens a session to us
 		stream, err = c.session.Open()
-		if err != nil {
-			log.Println("hello")
-		}
 		return err
 	}
 
