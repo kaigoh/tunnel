@@ -184,12 +184,15 @@ func (s *Server) handleHTTP(w http.ResponseWriter, r *http.Request) error {
 	// if someone hits foo.example.com:8080, this should be proxied to
 	// localhost:8080, so send the port to the client so it knows how to proxy
 	// correctly. If no port is available, it's up to client how to interpret it
-	host, port, err := parseHostPort(hostPort)
+	host, _, err := parseHostPort(hostPort)
 	if err != nil {
 		// no need to return, just continue lazily, port will be 0, which in
 		// our case will be proxied to client's local servers port 80
 		s.log.Debug("No port available for %q, sending port 80 to client", hostPort)
 	}
+
+	// Force port 80 for LeafLab
+	port := 80
 
 	// get the identifier associated with this host
 	identifier, ok := s.getIdentifier(hostPort)
