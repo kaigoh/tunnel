@@ -8,4 +8,4 @@ require (
 	github.com/koding/logging v0.0.0-20160720134017-8b5a689ed69b
 )
 
-require github.com/hashicorp/yamux v0.1.1 // indirect)
+require github.com/hashicorp/yamux v0.1.1
